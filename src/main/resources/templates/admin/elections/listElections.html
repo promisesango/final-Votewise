@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>elections list</title>
+    <!-- CSS -->
+    <!-- Add Material font (Roboto) and Material icon as needed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Add Material CSS, replace Bootstrap CSS -->
+    <link href="/css/material.css" rel="stylesheet">
+
+
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<h6> list of elections</h6>
+<table class="table table-striped">
+    <tr>
+        <th> id</th>
+        <th> year</th>
+        <th> type</th>
+    </tr>
+    <tr th:each="election : ${listElections}">
+        <td th:text="${election.id}">id</td>
+        <td th:text="${election.electionDate}">Election Date</td>
+        <td th:text="${election.electionType}">Election Type</td>
+    </tr>
+</table>
+
+
+
+
+
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Then Material JavaScript on top of Bootstrap JavaScript -->
+<script src="/static/js/material.min.js"></script>
+<script src="/static/js/index.js"></script>
+
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

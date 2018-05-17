@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>candidates</title>
+
+    <!-- CSS -->
+    <!-- Add Material font (Roboto) and Material icon as needed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Add Material CSS, replace Bootstrap CSS -->
+    <link href="/css/material.css" rel="stylesheet">
+
+
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<!--/*@thymesVar id="candidate" type="tech.diggle.apps.accomodation.candidates.Candidate.java"*/-->
+<form autocomplete="off" action="#" th:action="@{/candidate/createCandidate}"
+      th:object="${candidate}" method="post" class="form-horizontal"
+      role="form">
+    <div class="flex-container">
+        <div>
+
+            <h1>Registration Candidate </h1>
+            <label for="candidateName">Candidate Name</label>
+            <input id="candidateName" type="text" th:field="*{candidateName}" placeholder="Candidate Name"
+                   class="form-control"/>
+            <small th:if="${#fields.hasErrors('candidateName')}" th:errors="*{candidateName}"
+                   class="validation-message"></small>
+
+
+            <label for="motivation">motivation</label>
+            <input id="motivation" type="text" th:field="*{motivation}"
+                   placeholder="motivation" class="form-control"/>
+            <small th:if="${#fields.hasErrors('motivation')}" th:errors="*{motivation}"
+                   class="validation-message"></small>
+
+
+            <label for="party">party</label>
+            <input id="party" type="text" th:field="*{party}" placeholder="party"
+                   class="form-control"/>
+            <small th:if="${#fields.hasErrors('party')}" th:errors="*{party}"
+                   class="validation-message"></small>
+
+
+            <button type="submit" class="btn btn-primary btn-lg">Register Candidate</button>
+            <a href="/" class="btn btn-md btn-secondary btn-lg"> Cancel </a>
+            <br>
+            <span th:utext="${successMessage}"></span>
+        </div>
+        <a class=" btn " href="/candidate/candidate"> list candidates</a>
+
+    </div>
+</form>
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+
+
+</html>

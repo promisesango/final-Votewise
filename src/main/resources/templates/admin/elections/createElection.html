@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title> create election </title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+
+    <!-- CSS -->
+    <!-- Add Material font (Roboto) and Material icon as needed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Add Material CSS, replace Bootstrap CSS -->
+    <link href="/css/material.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6 jumbotron">
+            <form autocomplete="off" action="#" th:action="@{/election/createElection}"
+                  th:object="${election}" method="post" class="form-horizontal"
+                  role="form">
+                <h2>Create new election</h2>
+                <div class="form-group">
+                    <label for="electionType">Election Type</label>
+                    <input id="electionType" type="text" th:field="*{electionType}" placeholder="election type"
+                           class="form-control"/>
+                    <small th:if="${#fields.hasErrors('electionType')}" th:errors="*{electionType}"
+                           class="validation-message"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="electionDate">Election Date</label>
+                    <input id="electionDate" type="date" th:field="*{electionDate}"
+                           placeholder="electionDate" class="form-control"/>
+                    <small th:if="${#fields.hasErrors('electionDate')}" th:errors="*{electionDate}"
+                           class="validation-message"></small>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Create Election</button>
+                    <a href="/login" class="btn btn-md btn-secondary btn-lg">Login</a>
+                </div>
+
+                <span th:utext="${successMessage}"></span>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

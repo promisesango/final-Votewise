@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+    <title>candidates</title>
+
+    <!-- CSS -->
+    <!-- Add Material font (Roboto) and Material icon as needed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Add Material CSS, replace Bootstrap CSS -->
+    <link href="/static/css/material.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body>
+
+<table th:action="@{/candidate/candidate}"
+       class="table-borderless">
+
+    <div class="row">
+        <div class="col-sm-4" style="background-color:lavender;">
+            <h3> Candidate </h3>
+            <tr th:each=" candidate : ${candidate}">
+                <td th:text="${candidate.name}">name</td>
+                <td th:text="${candidate.motivation}">motivation</td>
+                <td th:text="${candidate.party}">party</td>
+            </tr>
+
+        </div>
+
+    </div>
+
+</table>
+
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+
+</html>

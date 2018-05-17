@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login | Off Campus Accommodation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+
+    <!-- CSS -->
+    <!-- Add Material font (Roboto) and Material icon as needed -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Add Material CSS, replace Bootstrap CSS -->
+    <link href="css/material.min.css" rel="stylesheet">
+
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6 jumbotron">
+            <!--<img th:src="@{/images/login.png}" class="img-fluid mx-auto" alt="Logo"/>-->
+            <form th:action="@{/login}" method="POST" class="form-signin">
+                <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                <br/>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" th:placeholder="Email"
+                           class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" th:placeholder="Password"
+                           id="password" name="password" class="form-control"/>
+                </div>
+
+                <div align="center" th:if="${param.error}">
+                    <span class="error">Email or Password invalid, please verify</span>
+                </div>
+                <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit"
+                        th:text="Login"></button>
+                <a href="/register" class="btn btn-lg btn-warning">Go To Registration Page</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

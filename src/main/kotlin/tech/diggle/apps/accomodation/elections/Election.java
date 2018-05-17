@@ -1,6 +1,8 @@
 package tech.diggle.apps.accomodation.elections;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -20,6 +22,7 @@ public class Election {
 
     @NotNull
     @Column(name = "electionDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date electionDate;
 
     public Election(@NotNull String electionType, @NotNull Date electionDate) {

@@ -1,0 +1,21 @@
+<!DOCTYPE html >
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/head::head"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+<main class="container content">
+
+    <div>
+        Elections
+        <div th:if="elections != null">
+            <a th:each="election : ${elections} " th:text="${election.date}"
+               th:href="${'/election/'+election.id}"><br></a>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

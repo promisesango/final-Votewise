@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<main class="content">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6 jumbotron">
+            <!--<img th:src="@{/images/login.png}" class="img-fluid mx-auto" alt="Logo"/>-->
+            <form th:action="@{/election/create}" method="POST" class="form-signin" th:object="${election}">
+                <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                <br/>
+                <div class="form-group">
+                    <label for="election">Election</label>
+                    <select type="text" id="election" name="election" th:placeholder="Type" th:field="*{type}">
+                        <option th:each="type : ${T(tech.diggle.apps.accomodation.election.ElectionType).values()}"
+                                th:value="${type}"
+                                th:text="${type}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Election Date</label>
+                    <input id="date" type="date" th:field="*{date}"
+                           placeholder="Date" class="form-control"/>
+                    <small th:if="${#fields.hasErrors('date')}" th:errors="*{date}"
+                           class="validation-message"></small>
+                </div>
+
+                <div align="center" th:if="${param.error}">
+                    <span class="error">Email or Password invalid, please verify</span>
+                </div>
+                <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit"
+                        th:text="Login"></button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

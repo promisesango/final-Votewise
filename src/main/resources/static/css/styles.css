@@ -49,17 +49,20 @@
   --light-light: #fafafa;
   --font-family-monospace: "Roboto Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-family-serif: "Roboto Slab", Georgia, "Times New Roman", Times, serif; }
+  --font-family-serif: "Roboto Slab", Georgia, "Times New Roman", Times, serif;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   position: relative;
-  min-height: 100%; }
+  min-height: 100%;
+}
 
 body {
   margin-bottom: 60px;
-  /* Margin bottom by footer height */ }
+  /* Margin bottom by footer height */
+}
 
 .footer {
   position: absolute;
@@ -69,4 +72,16 @@ body {
   /* Set the fixed height of the footer here */
   line-height: 60px;
   /* Vertically center the text there */
-  background-color: #f5f5f5; }
+  background-color: #f5f5f5;
+}
+
+.jumbotron {
+  margin: 8px;
+}
+
+a.no-style {
+  color: unset;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=styles.css.map */

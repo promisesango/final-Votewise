@@ -34,8 +34,8 @@
                 </div>
                 <div class="form-group">
                     <label for="manifesto">party manifesto</label>
-                    <input id="manifesto" type="text" th:field="*{manifesto}"
-                           placeholder="manifesto" class="form-control"/>
+                    <textarea id="manifesto" th:field="*{manifesto}"
+                           placeholder="manifesto" class="form-control"></textarea>
                     <small th:if="${#fields.hasErrors('manifesto')}" th:errors="*{manifesto}"
                            class="validation-message"></small>
                 </div>

@@ -11,6 +11,19 @@
 
     <span th:each="party : ${parties} " th:text="party.name"></span>
 
+    <div th:each="party : ${parties}" class="jumbotron">
+        <a th:href="'party/'+${party.id}" class="no-style">
+            <h3 th:text="${party.name}">Party Name</h3>
+            <h4 th:text="${party.motto}">The motto of the party, just a short sentence.</h4>
+
+            <p th:text="${party.manifesto}">Here comes the part manifesto. The party manifesto is a long paragraph, but
+                it
+                doesn't really change
+                anything. However, it is necessary to have one at all costs.
+                When evaluating the worthiness of a party, their capacity to come up with a viable manifesto is
+                certainly a
+                rate determining step.</p></a>
+    </div>
 
 </main>
 <div th:replace="fragments/footer :: footer">...</div>

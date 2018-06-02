@@ -7,7 +7,7 @@
 
 <div th:replace="fragments/header :: header">...</div>
 
-<h1>Hello, world!</h1>
+<h3 th:each="candidate: ${candidates}">Election of <span th:text="${candidate.firstName}"></span></h3>
 
 <div th:replace="fragments/footer :: footer">...</div>
 

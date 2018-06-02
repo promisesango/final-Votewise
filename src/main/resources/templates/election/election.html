@@ -11,8 +11,9 @@
     <h1>Election of <span th:text="${election.date}"></span></h1>
 
     <div class="jumbotron">
-        <h1>Electorate</h1>
-        <p th:each="candidate : election.candidates" th:text="${candidate.firstName+' '+ candidate.lastName}"></p>
+        <h3>Electorate</h3>
+        <a th:href="${'/candidate/'+election.id+'/create'}">Add</a>
+        <p th:each="candidate : ${election.candidates}" th:text="${candidate.firstName+' '+ candidate.lastName}"></p>
     </div>
 </div>
 

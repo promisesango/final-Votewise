@@ -14,7 +14,7 @@
         <div class="col-12 col-md-9 col-lg-6 jumbotron">
             <!--<img th:src="@{/images/login.png}" class="img-fluid mx-auto" alt="Logo"/>-->
             <form th:action="@{/party/create}" method="POST" class="form-signin" th:object="${party}">
-                <h3 class="form-signin-heading" th:text="create a party"></h3>
+                <h3 class="form-signin-heading" th:text="create"></h3>
                 <br/>
 
 
@@ -36,7 +36,7 @@
                     <label for="manifesto">party manifesto</label>
                     <input id="manifesto" type="text" th:field="*{manifesto}"
                            placeholder="manifesto" class="form-control"/>
-                    <small th:if="${#fields.hasErrors('date')}" th:errors="*{manifesto}"
+                    <small th:if="${#fields.hasErrors('manifesto')}" th:errors="*{manifesto}"
                            class="validation-message"></small>
                 </div>
 

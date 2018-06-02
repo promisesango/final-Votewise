@@ -11,32 +11,40 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6 jumbotron">
             <!--<img th:src="@{/images/login.png}" class="img-fluid mx-auto" alt="Logo"/>-->
-            <form th:action="@{/election/create}" method="POST" class="form-signin" th:object="${election}">
+            <form th:action="@{'/candidate/'+${election.id}+'/create'}" method="POST" class="form-signin" th:object="${candidate}">
                 <h3 class="form-signin-heading" th:text="Welcome"></h3>
                 <br/>
                 <div class="form-group">
-                    <label for="election">Election</label>
-                    <select type="text" id="election" name="election" th:placeholder="Type" th:field="*{type}">
-                        <option th:each="type : ${T(tech.diggle.apps.accomodation.election.ElectionType).values()}"
-                                th:value="${type}"
-                                th:text="${type}">
+                    <label for="firstName">Candidate Name</label>
+                    <input type="text" id="firstName" th:field="*{firstName}"
+                           placeholder="First Name" class="form-control">
+                    <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                           class="validation-message"></small>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Candidate Name</label>
+                    <input type="text" id="lastName" th:field="*{lastName}"
+                           placeholder="Last Name" class="form-control">
+                    <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                           class="validation-message"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="party">party</label>
+                    <select type="text" id="party" name="party" th:placeholder="party" th:field="*{party}">
+                        <option th:each="party : ${party}"
+                                th:value="${party.id}"
+                                th:text="${party.name}">
                         </option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="date">Election Date</label>
-                    <input id="date" type="date" th:field="*{date}"
-                           placeholder="Date" class="form-control"/>
-                    <small th:if="${#fields.hasErrors('date')}" th:errors="*{date}"
-                           class="validation-message"></small>
-                </div>
 
                 <div align="center" th:if="${param.error}">
-                    <span class="error">Email or Password invalid, please verify</span>
+                    <span class="error"> candidate registering failed , try again </span>
                 </div>
-                <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit"
-                        th:text="Login"></button>
+                <button class="btn btn-lg btn-primary" name="Submit" value="regitser" type="Submit"
+                        th:text="Create"></button>
             </form>
         </div>
     </div>

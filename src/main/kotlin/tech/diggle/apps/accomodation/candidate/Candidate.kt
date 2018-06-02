@@ -1,9 +1,9 @@
 package tech.diggle.apps.accomodation.candidate
 
 import org.hibernate.validator.constraints.NotBlank
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import tech.diggle.apps.accomodation.election.Election
+import tech.diggle.apps.accomodation.party.Party
+import javax.persistence.*
 
 @Entity
 class Candidate {
@@ -16,6 +16,12 @@ class Candidate {
 
     @NotBlank
     var lastName: String = ""
+
+    @ManyToOne
+    var election: Election? = null
+
+    @ManyToMany
+    var party: List<Party> = emptyList()
 
 
 }

@@ -1,9 +1,11 @@
 package tech.diggle.apps.accomodation.party
 
 import org.hibernate.validator.constraints.NotBlank
+import tech.diggle.apps.accomodation.candidate.Candidate
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.OneToMany
 
 @Entity
 class Party {
@@ -19,4 +21,7 @@ class Party {
 
     @NotBlank
     var manifesto: String = ""
+
+    @OneToMany
+    var candidates: List<Candidate> = emptyList()
 }

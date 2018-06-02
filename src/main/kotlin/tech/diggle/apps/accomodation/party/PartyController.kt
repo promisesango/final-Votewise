@@ -38,6 +38,7 @@ class PartyController(val service: PartyService) {
         val party = this.service.findOne(id)
         model.addAttribute("title", party.name )
         model.addAttribute("party" ,party )
+        model.addAttribute("candidates", party.candidates)
         return "party/party"
 
     }

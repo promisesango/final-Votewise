@@ -7,8 +7,36 @@
 
 <div th:replace="fragments/header :: header">...</div>
 
-<h1> party of <span th:text="${party.name}"></span></h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="header" th:text="${party.name}">
+            Xicosu
+        </h1>
 
+        <h4 th:text="${party.motto}">The motto of the party, just a short sentence.</h4>
+
+        <p th:text="${party.manifesto}">Here comes the part manifesto. The party manifesto is a long paragraph, but
+            it
+            doesn't really change
+            anything. However, it is necessary to have one at all costs.
+            When evaluating the worthiness of a party, their capacity to come up with a viable manifesto is
+            certainly a
+            rate determining step.</p></a>
+    </div>
+
+    <div class="jumbotron">
+        <h3 class="header position-relative">
+            Party Candidates
+            <a th:href="${'/election'}" class="btn btn-float btn-primary fab-left">
+                <i class="material-icons">add</i></a>
+        </h3>
+
+        <a th:each="candidate: ${candidates}" th:href="${'/candidate/'+candidate.id}" class="candidate">
+            <h5 th:text="${candidate.firstName+' '+ candidate.lastName}">Promise Sango</h5>
+            <p th:text="${candidate.election.date}"></p>
+        </a>
+    </div>
+</div>
 
 <div th:replace="fragments/footer :: footer">...</div>
 

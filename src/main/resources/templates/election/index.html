@@ -8,6 +8,12 @@
 <div th:replace="fragments/header :: header">...</div>
 <main class="container content">
 
+    <div th:each="election : ${elections} " class="jumbotron">
+        <a href="" class="no-style"><h1>Primary Election of <span th:text="${#dates.format(election.date, 'dd MMM yyyy')}">2017</span></h1></a>
+        <button class="btn btn-primary btn-raised">Results</button>
+        <button class="btn btn-primary btn-raised">Vote</button>
+    </div>
+
     <div>
         Elections
         <div th:if="elections != null">

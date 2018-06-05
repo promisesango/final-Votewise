@@ -7,7 +7,42 @@
 
 <div th:replace="fragments/header :: header">...</div>
 
-<h1>Hello, world!</h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1><span th:text="${election.type}"></span> Election of <span th:text="${election.date}"></span></h1>
+
+        <h3>Electorate</h3>
+        <a th:href="${'/candidate/'+election.id+'/create'}">Add</a>
+        <a th:href="${'/election/'+election.id+'/results'}">Results</a>
+
+        <div th:if="${election.type == T(tech.diggle.apps.accomodation.election.ElectionType).COUNCIL}">
+            this is council
+        </div>
+
+        <div th:if="${election.type == T(tech.diggle.apps.accomodation.election.ElectionType).PRESIDENTIAL}">
+            <form th:action="@{'/election/'+${election.id}+'/vote/pres'}" method="POST" class="form-signin"
+                  th:object="${pres}">
+                <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                <br/>
+                <div class="form-group">
+                    <label for="candidate">Pick your Presidential Candidate</label>
+                    <select type="text" id="candidate" name="candidate" th:placeholder="Type" th:field="*{candidate}">
+                        <option th:each="candi_date : ${candidates}"
+                                th:value="${candi_date}"
+                                th:text="${candi_date.firstName+' '+ candi_date.lastName}">
+                        </option>
+                    </select>
+                </div>
+                <div align="center" th:if="${param.error}">
+                    <span class="error">Something is just wrong</span>
+                </div>
+                <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit">Submit vote</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
 
 <div th:replace="fragments/footer :: footer">...</div>
 

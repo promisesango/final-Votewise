@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
+import tech.diggle.apps.accomodation.vote.VoteService
 import javax.validation.Valid
 
 @RequestMapping("election")
 @Controller
-class ElectionController(@Autowired val service: ElectionService) {
+class ElectionController(@Autowired val service: ElectionService,
+                         @Autowired val voteService: VoteService) {
     @GetMapping
     fun index(model: Model): String {
         model.addAttribute("elections", service.getAll())
@@ -50,5 +52,38 @@ class ElectionController(@Autowired val service: ElectionService) {
         return "election/election"
     }
 
+    @GetMapping("{id}/vote")
+    fun getVote(@PathVariable id: Long, model: Model): String {
+        val election = service.get(id)
+        model.addAttribute("title", "Election details")
+        model.addAttribute("election", election)
+        model.addAttribute("candidates", election.candidates)
+        model.addAttribute("pres", PresidentialVoteModel())
+        model.addAttribute("coun", CouncilVoteModel())
+        return "election/vote"
+    }
 
+    @PostMapping("{id}/vote/coun")
+    fun postVotePresidential(@PathVariable("id") id: Long,
+                             coun: CouncilVoteModel, result: BindingResult): ModelAndView {
+        val mav = ModelAndView()
+        if (result.hasErrors()) {
+            mav.viewName = ""
+            return mav
+        }
+        voteService.vote(id, coun)
+        return ModelAndView("")
+    }
+
+    @PostMapping("{id}/vote/pres")
+    fun postVoteCouncil(@PathVariable("id") id: Long,
+                        pres: PresidentialVoteModel, result: BindingResult): ModelAndView {
+        val mav = ModelAndView()
+        if (result.hasErrors()) {
+            mav.viewName = ""
+            return mav
+        }
+        voteService.vote(id, pres)
+        return ModelAndView("redirect:/election/$id/results")
+    }
 }

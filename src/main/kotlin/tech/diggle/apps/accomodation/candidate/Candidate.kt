@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank
 import tech.diggle.apps.accomodation.election.Election
 import tech.diggle.apps.accomodation.party.Party
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 @Entity
 class Candidate {
@@ -18,10 +19,12 @@ class Candidate {
     var lastName: String = ""
 
     @ManyToOne
+    @NotNull
     var election: Election? = null
 
-    @ManyToMany
-    var party: List<Party> = emptyList()
+    @ManyToOne
+    @NotNull
+    var party: Party? = null
 
 
 }

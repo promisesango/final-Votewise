@@ -46,6 +46,7 @@ class ElectionController(@Autowired val service: ElectionService) {
         val election = service.get(id)
         model.addAttribute("title", "Election details")
         model.addAttribute("election", election)
+        model.addAttribute("candidates", election.candidates)
         return "election/election"
     }
 

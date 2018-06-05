@@ -44,14 +44,16 @@ class CandidateController(val service: CandidateService, val partyService: Party
     @PostMapping("{id}/create")
     fun postCreateCandidate(model: Model,
                             @PathVariable(name = "id") id: Long,
-                            @Valid candidate: Candidate, result: BindingResult): String {
-        if (service.find(candidate) != null) result.reject("candidate with same name is already registered")
+                            candidate: Candidate, result: BindingResult): String {
+        //  if (service.find(candidate) != null) result.reject("candidate with same name is already registered")
         if (result.hasErrors()) {
-            return ""
+            return "redirect:/candidate/$id/create"
         }
         candidate.election = electionService.get(id)
         val candidate_ = service.add(candidate)
-        return "redirect:/candidate/$id"
+        candidate_.election!!.candidates.add(candidate)
+        electionService.update(candidate_.election!!)
+        return "redirect:/election/$id"
     }
 
 

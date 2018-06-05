@@ -31,7 +31,7 @@ class Election {
 
     var status: ElectionStatus? = null
 
-    @OneToMany
-    var candidates: List<Candidate> = emptyList()
+    @OneToMany(fetch = FetchType.EAGER)
+    var candidates: MutableList<Candidate> = mutableListOf()
 }
 

@@ -8,12 +8,13 @@
 <div th:replace="fragments/header :: header">...</div>
 
 <div class="container">
+
     <div class="jumbotron">
         <h1><span th:text="${election.type}"></span> Election of <span th:text="${election.date}"></span></h1>
 
         <h3>Electorate</h3>
         <a class="btn btn-raised" th:href="${'/candidate/'+election.id+'/create'}">Add Candidate</a>
-        <a class="btn btn-raised"  th:href="${'/election/'+election.id+'/results'}">View Results</a>
+        <a class="btn btn-raised" th:href="${'/election/'+election.id+'/results'}">View Results</a>
 
         <div th:if="${election.type == T(tech.diggle.apps.accomodation.election.ElectionType).COUNCIL}">
             this is council

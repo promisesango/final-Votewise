@@ -21,11 +21,9 @@ class Election {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     var date: Date? = null
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ ")
     var startDate: Date? = null
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm:ss.SSSZ ")
     var endDate: Date? = null
 

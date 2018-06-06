@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header">...</div>
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Election of <span th:text="${election.date}"></span></h1>
+
+        <h3>Results</h3>
+        <a class="btn btn-raised" th:href="${'/election/'+election.id+'/vote'}">Vote</a>
+    </div>
+
+    <div class="jumbotron">
+        <h3>Results</h3>
+        <div class="result" th:each="result: ${results}">
+            <span th:text="${result.key.firstName +' '+ result.key.lastName}"></span>
+            <span th:text="${result.value}"></span>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+
+</body>
+</html>

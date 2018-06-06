@@ -1,14 +1,23 @@
 package tech.diggle.apps.accomodation.vote
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 import tech.diggle.apps.accomodation.election.CouncilVoteModel
 import tech.diggle.apps.accomodation.election.ElectionService
 import tech.diggle.apps.accomodation.election.PresidentialVoteModel
+import org.springframework.security.authentication.AnonymousAuthenticationToken
+import org.springframework.security.core.context.SecurityContextHolder
+import tech.diggle.apps.accomodation.candidate.Candidate
+import tech.diggle.apps.accomodation.user.UserRepository
+
 
 @Service
 class VoteServiceImpl(@Autowired val repository: VoteRepository,
-                      @Autowired val electionService: ElectionService) : VoteService {
+                      @Autowired val candidateVoteRepository: CandidateVoteRepository,
+                      @Autowired val electionService: ElectionService,
+                      @Qualifier("userRepository")
+                      @Autowired val userRepository: UserRepository) : VoteService {
     override fun addVote(vote: Vote): Vote {
         return this.repository.save(vote)
     }
@@ -17,17 +26,38 @@ class VoteServiceImpl(@Autowired val repository: VoteRepository,
         return this.repository.findAll()
     }
 
-
     override fun vote(id: Long, model: PresidentialVoteModel) {
+        val authentication = SecurityContextHolder.getContext().authentication
+        if (authentication is AnonymousAuthenticationToken) return
+        val userId = userRepository.findByEmail(authentication.name).id.toLong()
+
+        val cVoteK = CandidateVoteKey()
+        cVoteK.electionId = id
+        cVoteK.userId = userId
+        if (candidateVoteRepository.exists(cVoteK)) throw IllegalStateException("Already Voted")
+
+        candidateVoteRepository.save(CandidateVote(userId, id))
+
         val vote = Vote()
         val election = electionService.get(id)
         vote.candidate = model.candidate
         vote.election = election
         vote.priority = 1
         repository.save(vote)
+
     }
 
     override fun vote(id: Long, model: CouncilVoteModel) {
+        val authentication = SecurityContextHolder.getContext().authentication
+        if (authentication is AnonymousAuthenticationToken) return
+        val userId = userRepository.findByEmail(authentication.name).id.toLong()
+
+        val cVoteK = CandidateVoteKey()
+        cVoteK.electionId = id
+        cVoteK.userId = userId
+        if (candidateVoteRepository.exists(cVoteK)) throw IllegalStateException("Already Voted")
+        candidateVoteRepository.save(CandidateVote(userId, id))
+
         if (model.candidate1 != null) {
             val vote = Vote()
             val election = electionService.get(id)
@@ -68,5 +98,15 @@ class VoteServiceImpl(@Autowired val repository: VoteRepository,
             vote.priority = 1
             repository.save(vote)
         }
+    }
+
+    override fun getResults(electionId: Long): Any {
+        val election = electionService.get(electionId) ?: throw IllegalArgumentException("")
+        val votes = repository.getByElectionId(electionId)
+        val candidates = election.candidates
+        val results: MutableMap<Candidate, Int> = mutableMapOf()
+        for (candidate in candidates)
+            results[candidate] = votes.filter { it.candidate == candidate }.count()
+        return results
     }
 }

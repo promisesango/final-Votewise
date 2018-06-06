@@ -8,4 +8,5 @@ interface VoteService{
     fun getAll(): List<Vote>
     fun vote(id: Long, model: PresidentialVoteModel)
     fun vote(id: Long, model: CouncilVoteModel)
+    fun getResults(electionId: Long): Any
 }

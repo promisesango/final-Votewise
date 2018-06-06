@@ -52,6 +52,16 @@ class ElectionController(@Autowired val service: ElectionService,
         return "election/election"
     }
 
+    @GetMapping("{id}/results")
+    fun electionResults(@PathVariable id: Long, model: Model): String {
+        val election = service.get(id)
+        model.addAttribute("title", "Election results")
+        model.addAttribute("election", election)
+        model.addAttribute("candidates", election.candidates)
+        model.addAttribute("results", voteService.getResults(id))
+        return "election/results"
+    }
+
     @GetMapping("{id}/vote")
     fun getVote(@PathVariable id: Long, model: Model): String {
         val election = service.get(id)
@@ -72,7 +82,7 @@ class ElectionController(@Autowired val service: ElectionService,
             return mav
         }
         voteService.vote(id, coun)
-        return ModelAndView("")
+        return ModelAndView("redirect:/election/$id/results")
     }
 
     @PostMapping("{id}/vote/pres")

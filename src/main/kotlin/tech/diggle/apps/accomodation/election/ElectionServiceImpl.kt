@@ -21,4 +21,7 @@ class ElectionServiceImpl(@Autowired val repository: ElectionRepository) : Elect
         return this.repository.findByDateAndType(election.date!!, election.type!!)
     }
 
+    override fun getResults(id: Long): Any {
+        return true
+    }
 }

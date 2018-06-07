@@ -100,7 +100,7 @@ class VoteServiceImpl(@Autowired val repository: VoteRepository,
         }
     }
 
-    override fun getResults(electionId: Long): Any {
+    override fun getResults(electionId: Long): Map<Candidate, Int> {
         val election = electionService.get(electionId) ?: throw IllegalArgumentException("")
         val votes = repository.getByElectionId(electionId)
         val candidates = election.candidates

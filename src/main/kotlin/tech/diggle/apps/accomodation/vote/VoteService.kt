@@ -1,5 +1,6 @@
 package tech.diggle.apps.accomodation.vote
 
+import tech.diggle.apps.accomodation.candidate.Candidate
 import tech.diggle.apps.accomodation.election.CouncilVoteModel
 import tech.diggle.apps.accomodation.election.PresidentialVoteModel
 
@@ -8,5 +9,5 @@ interface VoteService{
     fun getAll(): List<Vote>
     fun vote(id: Long, model: PresidentialVoteModel)
     fun vote(id: Long, model: CouncilVoteModel)
-    fun getResults(electionId: Long): Any
+    fun getResults(electionId: Long): Map<Candidate, Int>
 }
